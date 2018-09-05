@@ -21,9 +21,52 @@
       <h1>Latest Mars News</h1>
     </div>
             {% for mars in martian%}
-            <div class="container-fluid">
+            <!-- News -->
+            <div class="container-fluid" id="news">
               <h2>{{mars.news_title}}</h2>
               <p>{{mars.news_print}}</p>
+            </div>
+
+            <!-- Image, Weather, and Facts -->
+            <div class="container-fluid" id="img_weather_facts">
+              <div class="row">
+                <!-- Featured Image -->
+                <div class="col-md-7">
+                  <h3>Featured Image</h3>
+                  <img src="{{mars.featured_image_url}}" alt="JPL Featured Image" style="width: 80%;">
+                </div>
+                <div class="col-md-5">
+                  <!-- Weather -->
+                  <ul>
+                    <h3>Mars Weather</h3>
+                    {{mars.mars_weather}}
+                  </ul>
+
+                  <!-- Facts -->
+                  <ul>
+                    {{mars.html_table|safe}}
+                    <a href="{{mars.html_table}}"></a>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- Hemispheres -->
+            <div class="container-fluid">
+              <h3 align="center">Mars Hemispheres</h3>
+              <div class="body">
+              <div class="row">
+                <div class="col-md-6">
+                  {% for hemisphere in mars.hemisphere_image_urls[0:4] %}
+
+                  <img src="{{hemisphere['img_url']}}" alt="hemisphere" style="width:50%;">
+                  <div class="caption" style="font-weight: bold;">
+                    {{hemisphere['title']}}
+                  </div>
+                  {% endfor %}
+                </div>
+              </div>
+              </div>
             </div>
             {% endfor %}
 
